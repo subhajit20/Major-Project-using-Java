@@ -8,6 +8,38 @@
         <servlet-name>signup</servlet-name>
         <servlet-class>api.signup</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>api.HomeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>api.ProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CategoryServlet</servlet-name>
+        <servlet-class>api.CategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Salon</servlet-name>
+        <servlet-class>api.Salon</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PlumberServlet</servlet-name>
+        <servlet-class>api.PlumberServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CleanerServlet</servlet-name>
+        <servlet-class>api.CleanerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>electricianServlet</servlet-name>
+        <servlet-class>api.electricianServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cleaner</servlet-name>
+        <servlet-class>api.Cleaner</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -15,6 +47,38 @@
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/HomeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/ProfileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoryServlet</servlet-name>
+        <url-pattern>/CategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Salon</servlet-name>
+        <url-pattern>/Salon</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PlumberServlet</servlet-name>
+        <url-pattern>/PlumberServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CleanerServlet</servlet-name>
+        <url-pattern>/CleanerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>electricianServlet</servlet-name>
+        <url-pattern>/electricianServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cleaner</servlet-name>
+        <url-pattern>/Cleaner</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
