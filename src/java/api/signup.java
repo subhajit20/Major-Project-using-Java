@@ -1,76 +1,88 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package api;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import oracle.jdbc.OracleConnection;
+import oracle.jdbc.OraclePreparedStatement;
 
-/**
- *
- * @author subha
- */
 public class signup extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    
+    String vName,vAdd,vEmail,vPh,vPass,vGender;
+    OracleConnection oconn=null;
+    OraclePreparedStatement ost;
+    String query;
+    RequestDispatcher disp=null;
+    
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet signup</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet signup at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        response.setContentType("text/html");
+
+        String htmlFilePath = "/html/auth/Signup.jsp";
+        request.getRequestDispatcher(htmlFilePath).forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        vName = request.getParameter("tbName");
+             vAdd = request.getParameter("tbAdd");
+             vEmail = request.getParameter("tbEmail");
+             vPh = request.getParameter("tbPh");
+             vPass = request.getParameter("tbPass");
+             vGender = request.getParameter("rbGender");
+             
+             
+            try{
+                DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+                 oconn = (OracleConnection)DriverManager.getConnection("jdbc:oracle:thin:@Subhajit_Ghosh:1521:orcl","subhajit","ghosh");
+                 String q = "INSERT INTO register values(?,?,?,?,?,?)";
+  //               oconn = (OracleConnection)DriverManager.getConnection("jdbc:oracle:thin:@DESKTOP-1B6LLCK:1521:orcl","soumadri","biswas");
+//                 oconn = (OracleConnection)DriverManager.getConnection("jdbc:oracle:thin:@DESKTOP-1B6LLCK:1521:orcl","soumadri","biswas");
+                 ost =(OraclePreparedStatement) oconn.prepareStatement(q);
+            
+             ost.setString(1,vName);
+             ost.setString(2,vAdd);
+             ost.setString(3,vEmail);
+             ost.setString(4,vPh);
+             ost.setString(5,vPass);
+             ost.setString(6,vGender);
+             
+             int ra = ost.executeUpdate();
+             disp = request.getRequestDispatcher("/html/auth/Signup.jsp");
+                if (ra>0)
+                {
+                    request.setAttribute("status","success");
+                out.println("Succ");
+                }
+                else
+                {
+                    
+                    request.setAttribute("status","failed");
+                    out.println("Fail");
+                }
+                disp.forward(request, response);
+                
+            
+            } catch (SQLException ex) {
+            Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                ost.close();
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(signup.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
     }
 
     /**
