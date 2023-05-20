@@ -69,16 +69,6 @@
         return uniqueNum;
     }
     
-    const isLoggedin = () =>{
-        const user_email = localStorage.getItem('user_email');
-        
-        if(user_email !== 'null' || user_email !== ''){
-            return user_email;
-        }else{
-            return false;
-        }
-    }
-    
     const getCart = () =>{
         const cart = localStorage.getItem('cart');
         
@@ -100,9 +90,10 @@
                     status:true,
                     data:{
                         id:randomIdGenerator(),
-                        email:email,
-                        orderDate:dateField.value,
-                        orderTime:timeField.value,
+                        email:user.email,
+                        serviceDate:dateField.value,
+                        serviceTime:timeField.value,
+                        orderDate:new Date().toLocaleDateString(),
                         Category:"Plumber",
                         isActive:true,
                         service:"Gieser Plumber",
@@ -122,9 +113,10 @@
                         status:true,
                         data:{
                             id:randomIdGenerator(),
-                            email:email,
-                            orderDate:dateField.value,
-                            orderTime:timeField.value,
+                            email:user.email,
+                            serviceDate:dateField.value,
+                            serviceTime:timeField.value,
+                            orderDate:new Date().toLocaleDateString(),
                             Category:"Plumber",
                             isActive:true,
                             service:"Basin Plumber",
@@ -158,7 +150,7 @@
                     loader.style.display = 'block'
                     PlumberCartBtn.style.display = 'none'
 
-                    const user = isLoggedin();
+                    const {user} = isLoggedin();
                     const data = validation(user);
                     if(data.status !== false){
                         const {cart} = JSON.parse(myCart);

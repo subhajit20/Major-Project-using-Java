@@ -1,12 +1,16 @@
 package api;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.resource.cci.ResultSet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -58,62 +62,41 @@ OracleConnection oconn;
 
    
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-
-            
-    try {
-        DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
-        vemail = request.getParameter("tbemail");
-            vpass= request.getParameter("tbpass");
-            //out.println("<h1>Your Info:</h1>");
-            HttpSession session= request.getSession();
-            
-
-            System.out.println("Email -- "+vemail);
-            System.out.println("Pass -- "+vpass);
-            
-            
-            oconn = (OracleConnection)DriverManager.getConnection("jdbc:oracle:thin:@Subhajit_Ghosh:1521:orcl","subhajit","ghosh");
-
-            //oconn = (OracleConnection)DriverManager.getConnection("jdbc:oracle:thin:@Subhajit_Ghosh:1521:orcl","subhajit","ghosh");
-            String q="SELECT EMAIL,PASSWORD FROM register WHERE EMAIL=? AND PASSWORD=?";
-            ost =(OraclePreparedStatement) oconn.prepareStatement(q);
-            ost.setString(1,vemail);
-            ost.setString(2,vpass);
-            int ra = ost.executeUpdate();
-            request.setAttribute("emal",vemail); 
-
-            dis = request.getRequestDispatcher("/html/auth/Login.jsp");
-            if(ra>0)
-            {
-                request.setAttribute("status","Success");    
-                request.setAttribute("email",vemail);
-
-//                request.setAttribute('email', vemail)
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-                
-            }else
-            {
-                //out.println("<h2>Wrong Email and password entered  &nbsp;&nbsp;&nbsp;&nbsp; "+vemail+" / "+vpass+"</h2>");
-                request.setAttribute("status","failed");
-                
-            }
-            
-            dis.forward(request, response);
-            
-            
-    } catch (SQLException ex) {
-        Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    finally{
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {   
+        Connection oconn = null;
+        response.setContentType("text/html");
         try {
-            ost.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                
+                DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+                vemail = request.getParameter("tbemail");
+                vpass= request.getParameter("tbpass");
+                HttpSession session= request.getSession();
+
+                System.out.println("Email -- "+vemail);
+                System.out.println("Pass -- "+vpass);
+
+//                oconn = (OracleConnection)DriverManager.getConnection("jdbc:oracle:thin:@DESKTOP-1B6LLCK:1521:orcl","soumadri","biswas");
+                oconn = (OracleConnection)DriverManager.getConnection("jdbc:oracle:thin:@Subhajit_Ghosh:1521:orcl","subhajit","ghosh");
+
+                String q = "SELECT * FROM register WHERE EMAIL=? AND PASSWORD=?";
+                PreparedStatement  ost = oconn.prepareStatement(q);
+                ost.setString(1,vemail);
+                ost.setString(2,vpass);
+                java.sql.ResultSet  rs = ost.executeQuery();
+
+                if(rs.next()){
+                    request.setAttribute("email",rs.getString("EMAIL")); 
+                    request.setAttribute("address",rs.getString("ADDRESS")); 
+                    request.setAttribute("phone",rs.getString("PHONENO"));
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                }else{
+                    request.setAttribute("status","failed"); 
+                    request.getRequestDispatcher("/html/auth/Login.jsp").forward(request, response);
+                }
+        } catch (SQLException e) {
+            request.setAttribute("status","failed"); 
+            request.getRequestDispatcher("/html/auth/Login.jsp").forward(request, response);
         }
-    }
             
     }
     

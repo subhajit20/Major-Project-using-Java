@@ -46,7 +46,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
                 DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                  oconn = (OracleConnection)DriverManager.getConnection("jdbc:oracle:thin:@Subhajit_Ghosh:1521:orcl","subhajit","ghosh");
                  String q = "INSERT INTO register values(?,?,?,?,?,?)";
-  //               oconn = (OracleConnection)DriverManager.getConnection("jdbc:oracle:thin:@DESKTOP-1B6LLCK:1521:orcl","soumadri","biswas");
+//                 oconn = (OracleConnection)DriverManager.getConnection("jdbc:oracle:thin:@DESKTOP-1B6LLCK:1521:orcl","soumadri","biswas");
 //                 oconn = (OracleConnection)DriverManager.getConnection("jdbc:oracle:thin:@DESKTOP-1B6LLCK:1521:orcl","soumadri","biswas");
                  ost =(OraclePreparedStatement) oconn.prepareStatement(q);
             

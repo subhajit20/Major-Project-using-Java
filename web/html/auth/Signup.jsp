@@ -37,15 +37,15 @@ and open the template in the editor.
           </div>
           <div class="input-box">
             <span class="details">Phone Number</span>
-            <input type="text" name="tbPh" placeholder="Enter your number" required>
+            <input type="number" name="tbPh" placeholder="Enter your number" required>
           </div>
           <div class="input-box">
             <span class="details">Password</span>
-            <input type="text" name="tbPass" placeholder="Enter your password" required>
+            <input type="password" name="tbPass" placeholder="Enter your password" required>
           </div>
           <div class="input-box">
             <span class="details">Confirm Password</span>
-            <input type="text" name="tbCPass" placeholder="Confirm your password" required>
+            <input type="password" name="tbCPass" placeholder="Confirm your password" required>
           </div>
         </div>
         <div class="gender-details">
@@ -86,6 +86,10 @@ and open the template in the editor.
         if ( status == "success")
         {
             swal("Data Updated");
+        }
+        else
+        {
+            swal("User already exist");
         }
         </script>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>

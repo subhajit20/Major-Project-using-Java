@@ -68,23 +68,13 @@
         return uniqueNum;
     }
     
-    const isLoggedin = () =>{
-        const user_email = localStorage.getItem('user_email');
-        
-        if(user_email !== 'null' || user_email !== ''){
-            return user_email;
-        }else{
-            return false;
-        }
-    }
-    
     const getCart = () =>{
         const cart = localStorage.getItem('cart');
         
         return cart;
     }
     
-    const validation = (email) =>{
+    const validation = (user) =>{
         console.log(AcService.checked,TvService.value,dateField.value,dateField.value,timeField.value);
         
         if(dateField.value === '' || timeField.value === ''){
@@ -99,9 +89,10 @@
                     status:true,
                     data:{
                         id:randomIdGenerator(),
-                        email:email,
-                        orderDate:dateField.value,
-                        orderTime:timeField.value,
+                        email:user.email,
+                        serviceDate:dateField.value,
+                        serviceTime:timeField.value,
+                        orderDate:new Date().toLocaleDateString(),
                         isActive:true,
                         service:"Ac Service",
                         Category:"Electiician",
@@ -121,9 +112,10 @@
                     status:true,
                     data:{
                         id:randomIdGenerator(),
-                        email:email,
-                        orderDate:dateField.value,
-                        orderTime:timeField.value,
+                        email:user.email,
+                        serviceDate:dateField.value,
+                        serviceTime:timeField.value,
+                        orderDate:new Date().toLocaleDateString(),
                         isActive:true,
                         service:"Tv Service",
                         Category:"Electiician",
@@ -154,7 +146,7 @@
             if(myCart === null){
                 localStorage.setItem('cart',JSON.stringify({cart:[]}));
             }else{
-                const user = isLoggedin();
+                const {user} = isLoggedin();
                 const data = validation(user);
                 ElectricianCartBtn.display = 'none';
                 

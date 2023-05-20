@@ -6,6 +6,9 @@
 <jsp:include page="/html/home/Hero.jsp" />     
 
 <input type='hidden' id='email' value='<%= request.getAttribute("email") %>' />
+<input type='hidden' id='address' value='<%= request.getAttribute("address") %>' />
+<input type='hidden' id='phone' value='<%= request.getAttribute("phone") %>' />
+
 
 
 <jsp:include page="/html/home/Banner.jsp" /> 
@@ -17,42 +20,27 @@
 
 
 <script>
-    const emailField = document.getElementById('email')
-    const userEmail = localStorage.getItem('user_email');
-    const emailPlaceHolder = document.getElementById('userEmail')
-    let auth = document.getElementById("auth");
-    let loggedIn = document.getElementById("loggedIn");
-    const logout = document.getElementById("logout")
-
-    logout.addEventListener('click',(e)=>{
-        console.log(userEmail)
-        localStorage.setItem("user_email",'');
-        localStorage.setItem("isLoggedIn",'');
-
-        location.reload();
-        location.href = '/Major_Project/login';
-        auth.style.display = "block";
-        loggedIn.style.display = "none";
-
-    })
-    console.log(emailField.value === "null")
+    const emailField = document.getElementById('email'); 
+    const addressField = document.getElementById('address');
+    const phonenoField = document.getElementById('phone');
     
-     if(emailField.value !== "null"){
-         location.href = '/Major_Project'
-         localStorage.setItem('user_email',emailField.value)
-         emailPlaceHolder.innerHTML = emailField.value;
-         auth.style.display = "none";
-         loggedIn.style.display = "block";
-     }if(userEmail !== null || userEmail !== 'null' || userEmail !== ''){
-         console.log(userEmail)
-         emailPlaceHolder.innerHTML = userEmail;
-         auth.style.display = "none";
-         loggedIn.style.display = "block";
-     }if(userEmail === '' || userEmail === 'null'){
-         console.log("Nulllllll");
-         auth.style.display = "block";
-         loggedIn.style.display = "none";
-     }
+    if(emailField.value !== "null" && addressField.value !== "null" && phonenoField.value !== "null"){
+        let user_Details = {
+            email:emailField.value,
+            address:addressField.value,
+            phoneno:phonenoField.value
+         }
+        localStorage.setItem('user',JSON.stringify({user:user_Details}));
+        loggedIn.style.display = 'block';
+        auth.style.display = 'none'
+        myEmail.innerHTML = emailField.value;
+        myAddress.innerHTML = addressField.value; 
+        myPhone.innerHTML = phonenoField.value;
+        location.href = '/Major_Project';
+    }if(user === '' || user === 'null' | user === null){
+        console.log("Loggin Required!")
+    }
+ 
 </script>
 <jsp:include page="/html/components/FooterComponent.jsp" />
 

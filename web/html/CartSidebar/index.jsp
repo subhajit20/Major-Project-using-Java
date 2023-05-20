@@ -4,6 +4,7 @@
       <div id="allCartItems">
           
       </div>
+      <a href="/Major_Project/Order"><button type="button"  class="btn btn-warning mb-2" style="width: 100%;font-size:1.4rem;font: bold" >Go To Order Page</button></a>
   </div>
 </div>
 
@@ -66,8 +67,9 @@
                         allCartItems.innerHTML += '<div  class="card">'
                         allCartItems.innerHTML += "<h2>Service : "+cart[c].service+"</h2>"
                         allCartItems.innerHTML += "<h4>Category - "+cart[c].Category+"</h4>"
-                        allCartItems.innerHTML += "Order Date : "+cart[c].orderDate+"</h4></br>"
-                        allCartItems.innerHTML += "Order Time : "+cart[c].orderTime+"</h4></br>"   
+                        allCartItems.innerHTML += "Order Date : "+cart[c].orderDate+"</h4></br>" 
+                        allCartItems.innerHTML += "<h6>Price : "+cart[c].price+"</h6></br>"   
+
                         allCartItems.innerHTML += '<button type="button" onclick="deleteCart(this.id)" class="btn btn-primary mb-2" '+'id='+cart[c].id+'>Remove Cart</button>'
                         allCartItems.innerHTML += '</div>'
 

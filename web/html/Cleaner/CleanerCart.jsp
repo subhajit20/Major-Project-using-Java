@@ -65,23 +65,13 @@
     const alertMsg = document.querySelector('.alert');
     
     
-    const isLoggedin = () =>{
-        const user_email = localStorage.getItem('user_email');
-        
-        if(user_email !== 'null' || user_email !== ''){
-            return user_email;
-        }else{
-            return false;
-        }
-    }
-    
     const getCart = () =>{
         const cart = localStorage.getItem('cart');
         
         return cart;
     }
     
-    const validation = (email) =>{
+    const validation = (user) =>{
         
         if(dateField.value === '' || timeField.value === ''){
             return {
@@ -95,9 +85,10 @@
                     status:true,
                     data:{
                         id:randomIdGenerator(),
-                        email:email,
-                        orderDate:dateField.value,
-                        orderTime:timeField.value,
+                        email:user.email,
+                        serviceDate:dateField.value,
+                        serviceTime:timeField.value,
+                        orderDate:new Date().toLocaleDateString(),
                         Category:"Cleaner",
                         isActive:true,
                         service:"Kitchen Service",
@@ -117,9 +108,10 @@
                     status:true,
                     data:{
                         id:randomIdGenerator(),
-                        email:email,
-                        orderDate:dateField.value,
-                        orderTime:timeField.value,
+                        email:user.email,
+                        serviceDate:dateField.value,
+                        serviceTime:timeField.value,
+                        orderDate:new Date().toLocaleDateString(),
                         Category:"Cleaner",
                         isActive:true,
                         service:'Bathroom Cleaning',
@@ -152,7 +144,7 @@
                 cleanerCartBtn.style.display = "none";
                 loader.style.display = 'block';
                 
-                const user = isLoggedin();
+                const {user} = isLoggedin();
                 const data = validation(user);
                 
                 if(data.status !== false){
