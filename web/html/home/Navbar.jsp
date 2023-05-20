@@ -33,7 +33,10 @@
             </a>
 
             <ul class="dropdown-menu "   style="left :-100px">
-              <li><a class="dropdown-item" id='userEmail' ></a></li>
+              <li><a class="dropdown-item" id='myEmail' ></a></li> 
+              <li><a class="dropdown-item" id='myAddress' ></a></li>
+              <li><a class="dropdown-item" id='myPhone' ></a></li>
+
               <li><a class="dropdown-item" id='logout' href="#">Log Out</a></li>
             </ul>
           </div>
@@ -44,33 +47,52 @@
 </nav>
 
 <script>
-    const userEmail = localStorage.getItem('user_email');
-    const emailPlaceHolder = document.getElementById('userEmail')
+    
+    
+    const user = localStorage.getItem('user');
+    const myEmail = document.getElementById('myEmail') 
+    const myAddress = document.getElementById('myAddress')
+    const myPhone = document.getElementById('myPhone')
+
     let auth = document.getElementById("auth");
     let loggedIn = document.getElementById("loggedIn");
-    const logout = document.getElementById("logout")
+    const logout = document.getElementById("logout");
+    
+    const isLoggedin = () =>{
+        const user = localStorage.getItem('user');
+        
+        if(user !== 'null' || user !== '' || user !== null){
+            return JSON.parse(user);
+        }else{
+            return false;
+        }
+    }
 
     logout.addEventListener('click',(e)=>{
-        console.log(userEmail)
-        localStorage.setItem("user_email",'');
-        localStorage.setItem("isLoggedIn",'');
+        localStorage.setItem("user",'');
 
         location.reload();
-        location.href = '/Major_Project/login';
         auth.style.display = "block";
         loggedIn.style.display = "none";
+        location.href = '/Major_Project/login';
 
     })
 //    console.log(emailField.value === "null")
     
-    if(userEmail !== null || userEmail !== 'null' || userEmail !== ''){
-         console.log(userEmail)
-         emailPlaceHolder.innerHTML = userEmail;
-         auth.style.display = "none";
-         loggedIn.style.display = "block";
-     }if(userEmail === '' || userEmail === 'null'){
-         console.log("Nulllllll");
+    if(user !== null || user !== 'null' || user !== ''){
+        let {user:userData} = JSON.parse(user)
+        loggedIn.style.display = 'block';
+        auth.style.display = 'none'
+        myEmail.innerHTML = userData.email;
+        myAddress.innerHTML = userData.address; 
+        myPhone.innerHTML = userData.phoneno;
+     }if(user === '' || user === 'null' || user == null){
+         console.log("Login Required");
          auth.style.display = "block";
          loggedIn.style.display = "none";
      }
+     
+     
+     
+    
 </script>

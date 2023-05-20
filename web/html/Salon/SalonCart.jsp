@@ -67,15 +67,6 @@
     const alertMsg = document.querySelector('.alert');
     const SalonCartBtn = document.getElementById('SalonCartBtn');
     
-    const isLoggedin = () =>{
-        const user_email = localStorage.getItem('user_email');
-        
-        if(user_email !== 'null' || user_email !== ''){
-            return user_email;
-        }else{
-            return false;
-        }
-    }
     
     const getCart = () =>{
         const cart = localStorage.getItem('cart');
@@ -83,7 +74,7 @@
         return cart;
     }
     
-    const validation = (email) =>{
+    const validation = (user) =>{
         if(dateField.value === '' || timeField.value === ''){
             return {
                 status:false,
@@ -96,9 +87,10 @@
                     status:true,
                     data:{
                         id:randomIdGenerator(),
-                        email:email,
-                        orderDate:dateField.value,
-                        orderTime:timeField.value,
+                        email:user.email,
+                        serviceDate:dateField.value,
+                        serviceTime:timeField.value,
+                        orderDate:new Date().toLocaleDateString(),
                         Category:"Women",
                         isActive:true,
                         service:"Women Salon",
@@ -118,9 +110,10 @@
                     status:true,
                     data:{
                         id:randomIdGenerator(),
-                        email:email,
-                        orderDate:dateField.value,
-                        orderTime:timeField.value,
+                        email:user.email,
+                        serviceDate:dateField.value,
+                        serviceTime:timeField.value,
+                        orderDate:new Date().toLocaleDateString(),
                         Category:"Men",
                         isActive:true,
                         service:"Men Salon",
@@ -150,7 +143,7 @@
             if(myCart === null){
                 localStorage.setItem('cart',JSON.stringify({cart:[]}));
             }else{
-                const user = isLoggedin();
+                const {user} = isLoggedin();
                 const data = validation(user);
                 SalonCartBtn.style.display = 'none';
                 
