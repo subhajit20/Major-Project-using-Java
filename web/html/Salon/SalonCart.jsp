@@ -3,7 +3,7 @@
 </div>
 
 
-<div class="container">
+<div class="container" data-aos="flip-left">
     <h4>Select Service</h4>
     <p class="alert"></p>
     <div class="row">
