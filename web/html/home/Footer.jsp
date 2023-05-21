@@ -165,21 +165,21 @@
 </style>  
 
 <!-- Site footer -->
-    <footer class="site-footer">
+    <footer class="site-footer" data-aos="zoom-in-down" style="margin-top: 2rem"> 
       <div class="container">
         <div class="row">
           <div class="col-sm-12 col-md-6">
             <h6>About</h6>
-            <p class="text-justify">Discover a world of convenience and expertise with our trusted professionals. At [Website Name], we bring together skilled service providers to cater to your every need. From home repairs and renovations to beauty and wellness services, we've got you covered. Experience hassle-free bookings, reliable professionals, and exceptional quality, all at your fingertips. Say goodbye to the stress of finding the right experts ? with [Website Name], your urban lifestyle is just a click away</p>
+            <p class="text-justify">Discover a world of convenience and expertise with our trusted professionals. At Domestic Diamond, we bring together skilled service providers to cater to your every need. From home repairs and renovations to beauty and wellness services, we've got you covered. Experience hassle-free bookings, reliable professionals, and exceptional quality, all at your fingertips. Say goodbye to the stress of finding the right experts ? with [Website Name], your urban lifestyle is just a click away</p>
           </div>
 
           <div class="col-xs-6 col-md-3">
             <h6>Categories</h6>
             <ul class="footer-links">
-              <li><a href="http://scanfcode.com/category/c-language/">Electrician Service</a></li>
-              <li><a href="http://scanfcode.com/category/front-end-development/">Cleaning Service</a></li>
-              <li><a href="http://scanfcode.com/category/back-end-development/">Plumber Service</a></li>
-              <li><a href="http://scanfcode.com/category/java-programming-language/">Saloon Service</a></li>
+              <li><a href="http://localhost:8080/Major_Project/electricianServlet">Electrician Service</a></li>
+              <li><a href="http://localhost:8080/Major_Project/Cleaner">Cleaning Service</a></li>
+              <li><a href="http://localhost:8080/Major_Project/Salon">Plumber Service</a></li>
+              <li><a href="http://localhost:8080/Major_Project/PlumberServlet">Saloon Service</a></li>
             </ul>
           </div>
 
@@ -187,7 +187,6 @@
             <h6>Quick Links</h6>
             <ul class="footer-links">
               <li><a href="http://localhost:8080/Major_Project/">Home</a></li>
-              <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Categories</a></li>
             </ul>
           </div>
         </div>
@@ -195,20 +194,8 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-md-8 col-sm-6 col-xs-12">
-            <p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by 
-         <a href="#">Scanfcode</a>.
-            </p>
-          </div>
+          
 
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <ul class="social-icons">
-              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>   
-            </ul>
-          </div>
         </div>
       </div>
 </footer>

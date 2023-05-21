@@ -2,7 +2,7 @@
     <h2 style="text-align: center;margin: 1.3rem">Add That Item Into Cart</h2>
 </div>
 
-<div class="container">
+<div class="container" data-aos="flip-left">
     <h4>Select Service</h4>
     <p class="alert"></p>
     <div class="row">

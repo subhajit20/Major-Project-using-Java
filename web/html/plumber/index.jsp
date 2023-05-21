@@ -8,3 +8,4 @@
 <jsp:include page="../CartSidebar/index.jsp" />
 
 <jsp:include page="../components/FooterComponent.jsp" />
+<jsp:include page="../home/Footer.jsp" />
